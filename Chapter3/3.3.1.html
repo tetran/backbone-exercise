@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>title</title>
+</head>
+<body>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/underscore.js"></script>
+    <script src="../js/backbone.js"></script>
+    <script>
+        var TodoView = Backbone.View.extend({
+
+            tagName: 'li',
+
+            //className: 'foo',
+
+            //id: 'topix',
+
+            todoTpl: _.template('テンプレートの例'),
+
+            events: {
+                'dblclick label': 'edit',
+                'keypress .edit': 'updateOnEnter',
+                'blur .edit': 'close'
+            },
+
+            render: function() {
+                this.$el.html(this.todoTpl(this.model.toJSON()));
+                this.input = this.$('.edit');
+                return this;
+            },
+
+            edit: function() {
+
+            },
+
+            close: function() {
+
+            },
+
+            updateOnEnter: function() {
+
+            }
+        });
+
+        var todoView = new TodoView();
+        console.log(todoView.el);
+    </script>
+</body>
+</html>
