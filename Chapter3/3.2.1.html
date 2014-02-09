@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>title</title>
+</head>
+<body>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/underscore.js"></script>
+    <script src="../js/backbone.js"></script>
+    <script>
+        console.log("Block 1");
+        var Todo = Backbone.Model.extend({});
+        var todo1 = new Todo();
+        console.log(JSON.stringify(todo1));
+
+        var todo2 = new Todo({
+            title: 'コンソールに出力された属性値をチェック',
+            completed: true
+        });
+        console.log(JSON.stringify(todo2));
+    </script>
+    <script>
+        console.log("--------------------");
+        console.log("Block 2");
+        var Todo = Backbone.Model.extend({
+            initialize: function() {
+                console.log('モデルが初期化されました');
+            }
+        });
+        var myTodo = new Todo();
+    </script>
+    <script>
+        console.log("--------------------");
+        console.log("Block 3");
+        var Todo = Backbone.Model.extend({
+            defaults: {
+                title: '',
+                completed: false
+            }
+        });
+
+        var todo1 = new Todo();
+        console.log(JSON.stringify(todo1));
+
+        var todo2 = new Todo({
+            title: 'コンソールに出力されたモデルのプロパティを確認'
+        });
+        console.log(JSON.stringify(todo2));
+
+        var todo3 = new Todo({
+            title: 'このtodoは完了しています。',
+            completed: true
+        });
+        console.log(JSON.stringify(todo3));
+    </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>title</title>
+</head>
+<body>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/underscore.js"></script>
+    <script src="../js/backbone.js"></script>
+    <script>
+        function printAttr(todo, attr) {
+            console.log('Changed? ' + todo.hasChanged(attr));
+            console.log(attr.charAt(0).toUpperCase() + attr.slice(1) + ': ' + todo.get(attr));
+        }
+
+        console.log("--------------------");
+        console.log("[Block 1]");
+        var Todo = Backbone.Model.extend({
+            defaults: {
+                title: '',
+                completed: false
+            },
+            initialize: function() {
+                console.log('モデルが初期化されました');
+                this.on('change', function() {
+                    console.log('モデルの値が変更されました')
+                });
+            }
+        });
+
+        var myTodo = new Todo();
+
+        myTodo.set('title', '属性値が変化するとリスナーが呼び出される');
+        printAttr(myTodo, 'title');
+
+        myTodo.set('completed', true);
+        printAttr(myTodo, 'completed');
+
+        myTodo.set({
+            title: '複数の属性を一括で変更した場合、リスナーは一度だけ呼び出される',
+            completed:true
+        });
+
+    </script>
+    <script>
+        console.log("--------------------");
+        console.log("[Block 2]");
+        var Todo = Backbone.Model.extend({
+            defaults: {
+                title: '',
+                completed: false
+            },
+            initialize: function() {
+                console.log('モデルが初期化されました');
+                this.on('change:title', function() {
+                    console.log('titleが変更されました');
+                });
+            },
+            setTitle: function(newTitle) {
+                this.set({title: newTitle});
+            }
+        });
+        var myTodo = new Todo();
+
+        myTodo.set('title', 'ログに記録された内容をチェック');
+        myTodo.setTitle('日曜日に釣りに行く');
+
+        myTodo.set('completed', true);
+        printAttr(myTodo, 'completed');
+    </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>title</title>
+</head>
+<body>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/underscore.js"></script>
+    <script src="../js/backbone.js"></script>
+    <script>
+        console.log("--------------------");
+        console.log("[Block 1]");
+        var Todo = Backbone.Model.extend({
+            defaults: {
+                title: '',
+                completed: false
+            }
+        });
+
+        function print(todo) {
+            console.log(todo.get("title"));
+            console.log(todo.get("completed"));
+        }
+        function print2(todo) {
+            console.log(todo.toJSON());
+        }
+
+        var todo1 = new Todo();
+        print(todo1);
+        print2(todo1);
+
+        var todo2 = new Todo({
+            title: 'モデルのget()メソッドを使って値を取り出す',
+            completed: true
+        });
+        print(todo2);
+        print2(todo2);
+
+    </script>
+    <script>
+        console.log("--------------------");
+        console.log("[Block 2]");
+
+        function printAttr(todo, attr) {
+            console.log('Changed? ' + todo.hasChanged(attr));
+            console.log(attr.charAt(0).toUpperCase() + attr.slice(1) + ': ' + todo.get(attr));
+        }
+
+        var myTodo = new Todo({
+            title: 'インスタンス化の際にセットされた値'
+        });
+        printAttr(myTodo, 'title');
+        printAttr(myTodo, 'completed');
+
+        myTodo.set('title', 'Model.set()によってセットされた値');
+        printAttr(myTodo, 'title');
+        printAttr(myTodo, 'completed');
+
+        myTodo.set({
+            title: 'どちらの属性もModel.set()によって同時にセットされる',
+            completed: true
+        });
+        printAttr(myTodo, 'title');
+        printAttr(myTodo, 'completed');
+
+        // 本と結果が違う
+        var Person = new Backbone.Model();
+        Person.set({name: 'Jeremy'}, {silent: true});
+        console.log(Person.hasChanged());
+        console.log(Person.hasChanged('name'));
+    </script>
+</body>
+</html>
