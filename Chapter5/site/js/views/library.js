@@ -39,7 +39,7 @@ app.LibraryView = Backbone.View.extend({
         var formDate = {};
 
         $('#addBook div').children('input').each(function(i, el) {
-            if ($(el).val() != '') {
+            if ($(el).val() !== '') {
                 if (el.id === 'keywords') {
                     formDate[el.id] = [];
                     _.each($(el).val().split(' '), function(keyword) {
