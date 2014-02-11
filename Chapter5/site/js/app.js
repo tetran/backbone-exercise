@@ -4,6 +4,7 @@
 var app = app || {};
 
 $(function() {
+    /*
     var books = [
         { title: 'JavaScript: The Good Parts', author: 'Douglas Crockford',
             releaseDate: '2008', keywords: 'JavaScript Programming' },
@@ -16,6 +17,7 @@ $(function() {
         {title: 'Eloquent JavaScript', author: 'Marijn Haverbeke',
             releaseDate: '2011', keywords: 'JavaScript Programming'}
     ];
-
-    new app.LibraryView(books);
+    */
+    $('#releaseDate').datepicker();
+    new app.LibraryView();
 });
