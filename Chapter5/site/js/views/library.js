@@ -6,8 +6,13 @@ var app = app || {};
 app.LibraryView = Backbone.View.extend({
     el: '#books',
 
+    events: {
+        'click #add': 'addBook'
+    },
+
     initialize: function(initialBooks) {
         this.collection = new app.Library(initialBooks);
+        this.listenTo(this.collection, 'add', this.renderBook);
         this.render();
     },
 
@@ -23,5 +28,19 @@ app.LibraryView = Backbone.View.extend({
         });
 
         this.$el.append(bookView.render().el);
+    },
+
+    addBook: function(e) {
+        e.preventDefault();
+
+        var formDate = {};
+
+        $('#addBook div').children('input').each(function(i, el) {
+            if($(el).val() != '') {
+                formDate[el.id] = $(el).val();
+            }
+        });
+
+        this.collection.add(new app.Book(formDate));
     }
 });
