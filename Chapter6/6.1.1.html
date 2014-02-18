@@ -32,17 +32,9 @@
         }
     });
 
-    var MyView = Backbone.View.extend({
+    var MyView = Marionette.ItemView.extend({
         el: '#content',
-        template: $('#my-view-template').html(),
-        render: function() {
-            var compiledTemplate = _.template(this.template);
-
-            var data = this.model.toJSON();
-            var html = compiledTemplate(data);
-
-            this.$el.html(html);
-        }
+        template: '#my-view-template'
     });
 
     var Derick = new Person({
