@@ -24,15 +24,11 @@
     </div>
 </script>
 <script>
-    var ZombieView = Backbone.View.extend({
+    var ZombieView = Marionette.ItemView.extend({
         template: '#my-view-template',
 
         initialize: function() {
             this.listenTo(this.model, 'change', this.render);
-        },
-
-        close: function() {
-            this.stopListening();
         },
 
         render: function() {
